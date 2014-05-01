@@ -1,0 +1,16 @@
+#!/usr/bin/python
+import subprocess
+import atexit
+
+subprocess.call(['./node_modules/coffee-script/bin/coffee', '-o', 'javascripts', '-c', 'coffeescripts'])
+transpiler = subprocess.Popen(['./node_modules/coffee-script/bin/coffee', '-w', '-o', 'javascripts', '-c', 'coffeescripts'])
+tester = subprocess.Popen(['./node_modules/jasmine-node/bin/jasmine-node', '--autotest', './javascripts/.'])
+
+def cleanup():
+  if(transpiler.poll() == None): transpiler.terminate()
+  if(tester.poll() == None): tester.terminate()
+
+atexit.register(cleanup)
+
+while(transpiler.poll() == None and tester.poll() == None):
+  pass

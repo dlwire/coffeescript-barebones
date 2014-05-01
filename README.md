@@ -1,4 +1,1 @@
-coffeescript-barebones
-======================
-
-Barebones repository for developing coffeescript with jasmine tests
+This repository is a starter kit for writing coffeescript with jasmine tests. It transpiles the coffeescript into javascript and executes the tests on change. The watcher must be restarted when new files are added because the jasmine-node watcher doesn't detect new files.
